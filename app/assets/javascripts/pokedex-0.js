@@ -5,11 +5,13 @@ window.Pokedex.Collections = {};
 Pokedex.Models.Pokemon = Backbone.Model.extend({
   urlRoot: '/pokemon',
 
+  // Phase II
   parse: function (payload) {
     if (payload.toys) {
       this.toys().set(payload.toys);
       delete payload.toys;
 
+      // Phase IV
       this.toys().forEach((function (toy) {
         toy._pokemon = this;
       }).bind(this));
@@ -18,6 +20,7 @@ Pokedex.Models.Pokemon = Backbone.Model.extend({
     return payload;
   },
 
+  // Phase II
   toys: function () {
     if (!this._toys) {
       this._toys =
@@ -31,6 +34,7 @@ Pokedex.Models.Pokemon = Backbone.Model.extend({
 Pokedex.Models.Toy = Backbone.Model.extend({
   urlRoot: '/toys',
 
+  // Phase IV
   pokemon: function () {
     if (!this._pokemon) {
       this._pokemon =
@@ -40,6 +44,7 @@ Pokedex.Models.Toy = Backbone.Model.extend({
     return this._pokemon;
   },
 
+  // Phase IV
   parse: function (payload) {
     if (payload.pokemon) {
       this._pokemon =
